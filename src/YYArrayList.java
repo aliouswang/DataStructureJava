@@ -22,6 +22,17 @@ public class YYArrayList <T> {
         elementData[size ++] = t;
     }
 
+    public void add(int index, T t) {
+        checkIndex(index);
+        ensureCapacity(size + 1);
+        for (int i = size - 1; i >= index; i --) {
+            elementData[i + 1] = elementData[i];
+        }
+        elementData[index] = t;
+        size ++;
+    }
+
+
     private void ensureCapacity(int size) {
         if (size > elementData.length) {
             //enlarge size
@@ -38,7 +49,7 @@ public class YYArrayList <T> {
 
     private void checkIndex(int index) {
         if (index >= size) {
-            throw new ArrayIndexOutOfBoundsException();
+            throw new ArrayIndexOutOfBoundsException(String.format("length is %d, size is %d", elementData.length, index));
         }
     }
 
